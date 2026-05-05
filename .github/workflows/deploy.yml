@@ -10,3 +10,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            cd ~/app || git clone https://github.com/hwhwh23/cloud-infra-project.git ~/app
+            cd ~/app
+            git pull
+            pip3 install -r app/requirements.txt
+            sudo systemctl restart myapp
