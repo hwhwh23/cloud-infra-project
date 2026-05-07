@@ -18,7 +18,4 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             cd ~/app || git clone https://github.com/hwhwh23/cloud-infra-project.git ~/app
-            cd ~/app
-            git pull
-            pip3 install --break-system-packages -r app/requirements.txt
-            sudo systemctl restart myapp
+            bash ~/app/scripts/deploy.sh
