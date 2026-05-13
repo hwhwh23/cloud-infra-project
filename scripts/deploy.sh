@@ -1,4 +1,8 @@
 #!/bin/bash
 
-pip3 install --break-system-packages -r app/requirements.txt
-sudo systemctl restart myapp
+docker stop mycontainer || true
+docker rm mycontainer || true
+
+docker build -t myflaskapp .
+
+docker run -d -p 5000:5000 --name mycontainer myflaskapp
